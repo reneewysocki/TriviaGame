@@ -1,6 +1,6 @@
 $(document).ready(function () {
 
-    var timeRemaining = 20;
+    var timeRemaining = 60;
 
     var correctAnswers = 0;
     var wrongAnswers = 0;
@@ -8,14 +8,54 @@ $(document).ready(function () {
 
     var questions = [
         {
-            question: "Which of these terms means to cook food in its own juices with a small amount of fat over low heat, just until softened?",
-            choices: ["Sweating", "Sauteeing", "Stewing", "Simmering"],
-            correctAnswer: "Sweating"
+            question: "According to Jerry, how old was he when Gayle took his virginity?",
+            choices: ["30", "20", "24", "34"],
+            correctAnswer: "24"
         },
         {
-            question: "What is the difference between a convection and a conduction oven?",
-            choices: ["Heat", "Fans", "Broiler", "Simmering"],
-            correctAnswer: "Fans",
+            question: "According to Ron, what is NOT one of the three most important people in a man's life?",
+            choices: ["Butcher", "Barber", "Lover", "Mother"],
+            correctAnswer: "Mother",
+        },
+        {
+            question: "After Gunderson's death, who was appointed interim mayor of the town?",
+            choices: ["Jerry", "Joan", "Donna", "John Ralphio"],
+            correctAnswer: "Jerry",
+        },
+        {
+            question: "How much did Craig pay Andy to perform at a children's party?",
+            choices: ["$200", "$150", "$250", "$100"],
+            correctAnswer: "$150",
+        },
+        {
+            question: "How many personal days does Ron say he has accumulated when he goes on the run from Tammy?",
+            choices: ["228", "187", "246", "193"],
+            correctAnswer: "228",
+        },
+        {
+            question: "In what language does Chris train Champion while he's dog sitting?",
+            choices: ["Dutch", "Swedish", "German", "Chinese"],
+            correctAnswer: "German",
+        },
+        {
+            question: "Ron is devastated when he find out his favorite steak house has _______________",
+            choices: ["A New Manager", "Moved to a New Location", "Turned into an Arby's", "Been Closed by the Health Department"],
+            correctAnswer: "Been Closed by the Health Department",
+        },
+        {
+            question: "What does Ben ultimately buy for Leslie to cheer her up when she is recalled? ",
+            choices: ["A Trip to Paris", "JJ's Diner's Waffle Iron", "One Hour with Jen Barkley", "Embroidered Pillow"],
+            correctAnswer: "One Hour with Jen Barkley",
+        },
+        {
+            question: "What is the top spot on the Ron Swanson Pyramid of Greatness?",
+            choices: ["Honor", "America", "Woodworking", "Greatness Itself"],
+            correctAnswer: "Honor",
+        },
+        {
+            question: "What is NOT a name of one of Tom's businesses?",
+            choices: ["Entertainment 720", "The Clubmarine", "Rent-A-Swag", "Tom's Bistro"],
+            correctAnswer: "The Clubmarine",
         },
 
     ];
@@ -25,21 +65,15 @@ $(document).ready(function () {
             renderQuestions();
             timer();
             $('#start').hide();
+            $('#instructions').hide();
+            $('#submit').show();
         });
-
-        $('#submit').on('click', function () {
-            onSubmit();
-        });
-
-
-
-
     };
 
 
     function renderQuestions() {
         for (var i = 0; i < questions.length; i++) {
-            var question_el = $('<p class="question">').html(questions[i].question);
+            var question_el = $('<p class="question">').html((questions.indexOf(questions[i])+ 1) + ". " + questions[i].question);
 
             var choices_el = $('<div class="choices">');
 
@@ -77,28 +111,32 @@ $(document).ready(function () {
         $('#quiz').hide();
 
         for (var i = 0; i < questions.length; i++) {
-            console.log("Question " + questions.indexOf(questions[i]) + " Answer: " + questions[i].correctAnswer);
+            $("#results").append("<br> Question " + (questions.indexOf(questions[i])+ 1) + "<br>" + questions[i].question + "<br> Answer: " + questions[i].correctAnswer + "<br>" );
             var userInput = $('[name=q' + i + ']:checked').val();
-            console.log("Your Answer: " + userInput);
+            $("#results").append("Your Answer: " + userInput + "</br>");
             if (userInput === undefined) {
-                console.log("EMPTY")
+                $("#results").append("EMPTY<br>")
                 unanswered++
             }
             else if (questions[i].correctAnswer == userInput) {
-                console.log("CORRECT")
+                $("#results").append("CORRECT<br>")
                 correctAnswers++
             }
             else {
-                console.log("INCORRECT")
+                $("#results").append("INCORRECT<br>")
                 wrongAnswers++
             }
         }
-        $("#results").append("<div id='correctAnswers'> Correct Answers: " + correctAnswers + "</div>");
-        $("#results").append("<div id='wrongAnswers'> Wrong Answers: " + wrongAnswers + "</div>");
-        $("#results").append("<div id='unanswered'> Unanswered Questions: " + unanswered + "</div>");
+        $("#results").prepend("<div id='correctAnswers'> Correct Answers: " + correctAnswers + "</div>");
+        $("#results").prepend("<div id='wrongAnswers'> Wrong Answers: " + wrongAnswers + "</div>");
+        $("#results").prepend("<div id='unanswered'> Unanswered Questions: " + unanswered + "</div>");
     }
 
-
+    $('#submit').on('click', function () {
+        onSubmit();
+        $("#submit").hide();
+   })
 
     startGame();
+    $('#submit').hide();
 });
