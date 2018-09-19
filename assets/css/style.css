@@ -12,6 +12,7 @@
 
 #quiz {
     text-align: left;
+    margin-top: 50px;
 }
 
 .choice {
@@ -27,6 +28,12 @@
 
 #submit {
     margin-bottom: 20px;
+    margin-top: 10px;
+    background-color: #3F7D20;
+    color: white;
+    border: none;
+    padding: 10px;
+    font-weight: bold;
 }
 
 #timer {
@@ -39,7 +46,6 @@
 
 body {
     background-color: #3F7D20;
-    color: #3F7D20;
     background-image: url(../images/background.jpg);
     background-repeat: repeat;
 }
@@ -56,6 +62,7 @@ body {
     color: white;
     border: none;
     padding: 10px;
+    font-weight: bold;
 }
 
 .question {
@@ -84,6 +91,15 @@ body {
     color: white;
 }
 
+.incorrect {
+    font-weight: bold;
+    color: red;
+}
+
+.correct {
+    color: #3F7D20;
+    font-weight: bold;
+}
 
 @keyframes flashy {
     0%, 49% {

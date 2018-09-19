@@ -126,15 +126,16 @@ $(document).ready(function () {
             var userInput = $('[name=q' + i + ']:checked').val();
             $("#results").append("Your Answer: " + userInput + "</br>");
             if (userInput === undefined) {
-                $("#results").append("EMPTY<br>")
+                userInput = "Unanswered"
+                $("#results").append("UNANSWERED<br>")
                 unanswered++
             }
             else if (questions[i].correctAnswer == userInput) {
-                $("#results").append("CORRECT<br>")
+                $("#results").append("<span class='correct'>CORRECT</span><br>")
                 correctAnswers++
             }
             else {
-                $("#results").append("INCORRECT<br>")
+                $("#results").append("<span class='incorrect'>INCORRECT</span><br>")
                 wrongAnswers++
             }
         }
